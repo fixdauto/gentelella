@@ -22,7 +22,7 @@
     "**/.*",
     "documentation"
   ],
-  "devDependencies": {
+  "dependencies": {
     "jquery": "^2.2.3",
     "bootstrap": "^3.3.6",
     "font-awesome": "fontawesome#^4.6.1",
