@@ -39,7 +39,7 @@
  * and open the template in the editor.
  */
 
-var CURRENT_URL = window.location.href.split('?')[0],
+var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $BODY = $('body'),
     $MENU_TOGGLE = $('#menu_toggle'),
     $SIDEBAR_MENU = $('#sidebar-menu'),
@@ -169,9 +169,11 @@ $(document).ready(function() {
 // /Tooltip
 
 // Progressbar
-if ($(".progress .progress-bar")[0]) {
-    $('.progress .progress-bar').progressbar();
-}
+$(document).ready(function() {
+    if ($(".progress .progress-bar")[0]) {
+        $('.progress .progress-bar').progressbar();
+    }
+});
 // /Progressbar
 
 // Switchery
@@ -201,57 +203,59 @@ $(document).ready(function() {
 // /iCheck
 
 // Table
-$('table input').on('ifChecked', function () {
-    checkState = '';
-    $(this).parent().parent().parent().addClass('selected');
-    countChecked();
-});
-$('table input').on('ifUnchecked', function () {
-    checkState = '';
-    $(this).parent().parent().parent().removeClass('selected');
-    countChecked();
-});
+$(document).ready(function() {
+    $('table input').on('ifChecked', function () {
+        checkState = '';
+        $(this).parent().parent().parent().addClass('selected');
+        countChecked();
+    });
+    $('table input').on('ifUnchecked', function () {
+        checkState = '';
+        $(this).parent().parent().parent().removeClass('selected');
+        countChecked();
+    });
 
-var checkState = '';
+    var checkState = '';
 
-$('.bulk_action input').on('ifChecked', function () {
-    checkState = '';
-    $(this).parent().parent().parent().addClass('selected');
-    countChecked();
-});
-$('.bulk_action input').on('ifUnchecked', function () {
-    checkState = '';
-    $(this).parent().parent().parent().removeClass('selected');
-    countChecked();
-});
-$('.bulk_action input#check-all').on('ifChecked', function () {
-    checkState = 'all';
-    countChecked();
-});
-$('.bulk_action input#check-all').on('ifUnchecked', function () {
-    checkState = 'none';
-    countChecked();
-});
+    $('.bulk_action input').on('ifChecked', function () {
+        checkState = '';
+        $(this).parent().parent().parent().addClass('selected');
+        countChecked();
+    });
+    $('.bulk_action input').on('ifUnchecked', function () {
+        checkState = '';
+        $(this).parent().parent().parent().removeClass('selected');
+        countChecked();
+    });
+    $('.bulk_action input#check-all').on('ifChecked', function () {
+        checkState = 'all';
+        countChecked();
+    });
+    $('.bulk_action input#check-all').on('ifUnchecked', function () {
+        checkState = 'none';
+        countChecked();
+    });
 
-function countChecked() {
-    if (checkState === 'all') {
-        $(".bulk_action input[name='table_records']").iCheck('check');
+    function countChecked() {
+        if (checkState === 'all') {
+            $(".bulk_action input[name='table_records']").iCheck('check');
+        }
+        if (checkState === 'none') {
+            $(".bulk_action input[name='table_records']").iCheck('uncheck');
+        }
+
+        var checkCount = $(".bulk_action input[name='table_records']:checked").length;
+
+        if (checkCount) {
+            $('.column-title').hide();
+            $('.bulk-actions').show();
+            $('.action-cnt').html(checkCount + ' Records Selected');
+        } else {
+            $('.column-title').show();
+            $('.bulk-actions').hide();
+        }
     }
-    if (checkState === 'none') {
-        $(".bulk_action input[name='table_records']").iCheck('uncheck');
-    }
-
-    var checkCount = $(".bulk_action input[name='table_records']:checked").length;
-
-    if (checkCount) {
-        $('.column-title').hide();
-        $('.bulk-actions').show();
-        $('.action-cnt').html(checkCount + ' Records Selected');
-    } else {
-        $('.column-title').show();
-        $('.bulk-actions').hide();
-    }
-}
+});
 
 // Accordion
 $(document).ready(function() {
