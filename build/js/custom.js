@@ -39,18 +39,19 @@
  * and open the template in the editor.
  */
 
-var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
-    $BODY = $('body'),
-    $MENU_TOGGLE = $('#menu_toggle'),
-    $SIDEBAR_MENU = $('#sidebar-menu'),
-    $SIDEBAR_FOOTER = $('.sidebar-footer'),
-    $LEFT_COL = $('.left_col'),
-    $RIGHT_COL = $('.right_col'),
-    $NAV_MENU = $('.nav_menu'),
-    $FOOTER = $('footer');
-
-// Sidebar
 $(document).ready(function() {
+
+    var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
+        $BODY = $('body'),
+        $MENU_TOGGLE = $('#menu_toggle'),
+        $SIDEBAR_MENU = $('#sidebar-menu'),
+        $SIDEBAR_FOOTER = $('.sidebar-footer'),
+        $LEFT_COL = $('.left_col'),
+        $RIGHT_COL = $('.right_col'),
+        $NAV_MENU = $('.nav_menu'),
+        $FOOTER = $('footer');
+
+    // Sidebar
     // TODO: This is some kind of easy fix, maybe we can improve this
     var setContentHeight = function () {
         // reset height
@@ -129,11 +130,9 @@ $(document).ready(function() {
             mouseWheel:{ preventDefault: true }
         });
     }
-});
-// /Sidebar
+    // /Sidebar
 
-// Panel toolbox
-$(document).ready(function() {
+    // Panel toolbox
     $('.collapse-link').on('click', function() {
         var $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
@@ -157,27 +156,21 @@ $(document).ready(function() {
 
         $BOX_PANEL.remove();
     });
-});
-// /Panel toolbox
+    // /Panel toolbox
 
-// Tooltip
-$(document).ready(function() {
+    // Tooltip
     $('[data-toggle="tooltip"]').tooltip({
         container: 'body'
     });
-});
-// /Tooltip
+    // /Tooltip
 
-// Progressbar
-$(document).ready(function() {
+    // Progressbar
     if ($(".progress .progress-bar")[0]) {
         $('.progress .progress-bar').progressbar();
     }
-});
-// /Progressbar
+    // /Progressbar
 
-// Switchery
-$(document).ready(function() {
+    // Switchery
     if ($(".js-switch")[0]) {
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         elems.forEach(function (html) {
@@ -186,11 +179,9 @@ $(document).ready(function() {
             });
         });
     }
-});
-// /Switchery
+    // /Switchery
 
-// iCheck
-$(document).ready(function() {
+    // iCheck
     if ($("input.flat")[0]) {
         $(document).ready(function () {
             $('input.flat').iCheck({
@@ -199,11 +190,9 @@ $(document).ready(function() {
             });
         });
     }
-});
-// /iCheck
+    // /iCheck
 
-// Table
-$(document).ready(function() {
+    // Table
     $('table input').on('ifChecked', function () {
         checkState = '';
         $(this).parent().parent().parent().addClass('selected');
@@ -255,10 +244,8 @@ $(document).ready(function() {
             $('.bulk-actions').hide();
         }
     }
-});
 
-// Accordion
-$(document).ready(function() {
+    // Accordion
     $(".expand").on("click", function () {
         $(this).next().slideToggle(200);
         $expand = $(this).find(">:first-child");
@@ -269,15 +256,15 @@ $(document).ready(function() {
             $expand.text("+");
         }
     });
+
+    // NProgress
+    if (typeof NProgress != 'undefined') {
+        $(document).ready(function () {
+            NProgress.start();
+        });
+
+        $(window).load(function () {
+            NProgress.done();
+        });
+    }
 });
-
-// NProgress
-if (typeof NProgress != 'undefined') {
-    $(document).ready(function () {
-        NProgress.start();
-    });
-
-    $(window).load(function () {
-        NProgress.done();
-    });
-}
